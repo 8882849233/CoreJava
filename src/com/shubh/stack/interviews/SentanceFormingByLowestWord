@@ -1,0 +1,25 @@
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class SentanceFormingByLowestWord {
+
+    public static void main(String[] args) {
+        System.out.println(p("I love jav"));
+
+    }
+
+    public static String p(String sentence){
+        StringBuilder sb = new StringBuilder();
+        String input = sentence.substring(0, sentence.length());
+        LinkedHashMap<String, Integer> hm = new LinkedHashMap<>();
+        for(String word : input.toLowerCase().split(" ")){
+            hm.put(word, word.length());
+        }
+        hm.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .forEach(e->{
+                    sb.append(e.getKey() + " ");
+                });
+        return sb.substring(0, 1).toUpperCase() + sb.substring(1) + ".";
+    }
+}
